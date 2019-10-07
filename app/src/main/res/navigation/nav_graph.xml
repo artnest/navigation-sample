@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/firstFragment">
+
+    <fragment
+        android:id="@+id/firstFragment"
+        android:name="com.artnest.navigationsample.FirstFragment"
+        android:label="FirstFragment"
+        tools:layout="@layout/first_fragment">
+        <action
+            android:id="@+id/toSecondFragment"
+            app:destination="@id/secondFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/toSecondActivity"
+            app:destination="@id/secondActivity" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/secondFragment"
+        android:name="com.artnest.navigationsample.SecondFragment"
+        android:label="SecondFragment"
+        tools:layout="@layout/second_fragment">
+        <argument
+            android:name="amount"
+            app:argType="string" />
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="https://google.com" />
+        <action
+            android:id="@+id/toNestedGraph"
+            app:destination="@id/nested_navigation" />
+        <action
+            android:id="@+id/toThirdFragment"
+            app:destination="@id/thirdFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@+id/firstFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/thirdFragment"
+        android:name="com.artnest.navigationsample.ThirdFragment"
+        android:label="ThirdFragment"
+        tools:layout="@layout/third_fragment">
+        <action
+            android:id="@+id/showHelloDialog"
+            app:destination="@id/helloDialogFragment" />
+    </fragment>
+
+    <activity
+        android:id="@+id/secondActivity"
+        android:name="com.artnest.navigationsample.SecondActivity"
+        android:label="SecondActivity"
+        tools:layout="@layout/second_activity" />
+
+    <navigation
+        android:id="@+id/nested_navigation"
+        app:startDestination="@id/secondNestedFragment">
+
+        <fragment
+            android:id="@+id/firstNestedFragment"
+            android:name="com.artnest.navigationsample.FirstNestedFragment"
+            android:label="FirstNestedFragment"
+            tools:layout="@layout/first_nested_fragment">
+            <action
+                android:id="@+id/toSecondNestedFragment"
+                app:destination="@id/secondNestedFragment" />
+        </fragment>
+
+        <fragment
+            android:id="@+id/secondNestedFragment"
+            android:name="com.artnest.navigationsample.SecondNestedFragment"
+            android:label="SecondNestedFragment"
+            tools:layout="@layout/second_nested_fragment" />
+    </navigation>
+
+    <dialog
+        android:id="@+id/helloDialogFragment"
+        android:name="com.artnest.navigationsample.HelloDialogFragment"
+        android:label="HelloDialogFragment" />
+
+</navigation>
